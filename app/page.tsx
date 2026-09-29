@@ -36,6 +36,10 @@ export default async function Home() {
 
             <p>Signed in as {user.email}</p>
 
+            <p>
+                <a href="/profile">Go to Profile</a>
+            </p>
+
             <table
                 style={{
                     borderCollapse: "collapse",
