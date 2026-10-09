@@ -23,6 +23,10 @@ export default async function ProfilePage() {
         <main style={{ padding: "40px" }}>
             <h1>Profile</h1>
 
+            <p>
+                <a href="/">← Back Home</a>
+            </p>
+
             <p>Signed in as {user.email}</p>
 
             <ProfileForm

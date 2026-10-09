@@ -36,9 +36,19 @@ export default async function Home() {
 
             <p>Signed in as {user.email}</p>
 
-            <p>
-                <a href="/profile">Go to Profile</a>
-            </p>
+            <nav style={{ marginTop: "20px", marginBottom: "30px" }}>
+                <a href="/generate" style={{ marginRight: "20px" }}>
+                    Generate Caption
+                </a>
+
+                <a href="/feed" style={{ marginRight: "20px" }}>
+                    Caption Feed
+                </a>
+
+                <a href="/profile">
+                    Profile
+                </a>
+            </nav>
 
             <table
                 style={{
