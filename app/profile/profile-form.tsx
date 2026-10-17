@@ -55,6 +55,7 @@ export default function ProfileForm({
             const file = event.target.files?.[0];
 
             if (!file) {
+                setUploading(false);
                 return;
             }
 
@@ -97,90 +98,207 @@ export default function ProfileForm({
     };
 
     return (
-        <div>
-            {avatar && (
-                <div style={{ marginBottom: "20px" }}>
-                    <img
-                        src={avatar}
-                        alt="Profile"
-                        width={120}
-                        height={120}
+        <div
+            style={{
+                border: "1px solid #2f2f2f",
+                borderRadius: "20px",
+                background: "#0a0a0a",
+                padding: "28px",
+            }}
+        >
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "22px",
+                    marginBottom: "30px",
+                    flexWrap: "wrap",
+                }}
+            >
+                <div
+                    style={{
+                        width: "110px",
+                        height: "110px",
+                        borderRadius: "50%",
+                        overflow: "hidden",
+                        border: "1px solid #3a3a3a",
+                        background: "#111111",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#737373",
+                        fontSize: "14px",
+                    }}
+                >
+                    {avatar ? (
+                        <img
+                            src={avatar}
+                            alt="Profile"
+                            width={110}
+                            height={110}
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                            }}
+                        />
+                    ) : (
+                        <span>No photo</span>
+                    )}
+                </div>
+
+                <div>
+                    <p
                         style={{
-                            borderRadius: "50%",
-                            objectFit: "cover",
+                            margin: "0 0 8px",
+                            fontSize: "16px",
+                            fontWeight: 600,
+                        }}
+                    >
+                        Profile photo
+                    </p>
+
+                    <label
+                        style={{
+                            display: "inline-block",
+                            padding: "10px 14px",
+                            borderRadius: "10px",
+                            border: "1px solid #3a3a3a",
+                            background: "#111111",
+                            color: "#ffffff",
+                            cursor: uploading ? "not-allowed" : "pointer",
+                        }}
+                    >
+                        {uploading ? "Uploading..." : "Choose photo"}
+
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={uploadAvatar}
+                            disabled={uploading}
+                            style={{
+                                display: "none",
+                            }}
+                        />
+                    </label>
+
+                    <p
+                        style={{
+                            marginTop: "10px",
+                            marginBottom: 0,
+                            color: "#737373",
+                            fontSize: "13px",
+                        }}
+                    >
+                        JPG, PNG, or other image formats supported by your browser.
+                    </p>
+                </div>
+            </div>
+
+            <div
+                style={{
+                    display: "grid",
+                    gap: "22px",
+                }}
+            >
+                <div>
+                    <label
+                        htmlFor="first-name"
+                        style={{
+                            display: "block",
+                            marginBottom: "8px",
+                            fontSize: "15px",
+                            fontWeight: 500,
+                        }}
+                    >
+                        First name
+                    </label>
+
+                    <input
+                        id="first-name"
+                        type="text"
+                        value={first}
+                        onChange={(e) => setFirst(e.target.value)}
+                        style={{
+                            width: "100%",
+                            boxSizing: "border-box",
+                            border: "1px solid #3a3a3a",
+                            borderRadius: "12px",
+                            padding: "12px 14px",
+                            background: "#111111",
+                            color: "#ffffff",
+                            fontSize: "16px",
+                            outline: "none",
                         }}
                     />
                 </div>
-            )}
 
-            <div>
-                <label>Profile photo</label>
-                <br />
+                <div>
+                    <label
+                        htmlFor="last-name"
+                        style={{
+                            display: "block",
+                            marginBottom: "8px",
+                            fontSize: "15px",
+                            fontWeight: 500,
+                        }}
+                    >
+                        Last name
+                    </label>
 
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={uploadAvatar}
-                    disabled={uploading}
-                />
+                    <input
+                        id="last-name"
+                        type="text"
+                        value={last}
+                        onChange={(e) => setLast(e.target.value)}
+                        style={{
+                            width: "100%",
+                            boxSizing: "border-box",
+                            border: "1px solid #3a3a3a",
+                            borderRadius: "12px",
+                            padding: "12px 14px",
+                            background: "#111111",
+                            color: "#ffffff",
+                            fontSize: "16px",
+                            outline: "none",
+                        }}
+                    />
+                </div>
 
-                {uploading && <p>Uploading...</p>}
-            </div>
-
-            <br />
-
-            <div>
-                <label>First name</label>
-                <br />
-
-                <input
-                    type="text"
-                    value={first}
-                    onChange={(e) => setFirst(e.target.value)}
+                <button
+                    type="button"
+                    onClick={updateProfile}
+                    disabled={saving}
                     style={{
-                        border: "1px solid white",
-                        padding: "8px",
-                        marginTop: "5px",
+                        width: "fit-content",
+                        border: "none",
+                        borderRadius: "12px",
+                        padding: "12px 18px",
+                        cursor: saving ? "not-allowed" : "pointer",
+                        background: "#ffffff",
+                        color: "#050505",
+                        fontWeight: 600,
+                        fontSize: "15px",
+                        opacity: saving ? 0.6 : 1,
                     }}
-                />
+                >
+                    {saving ? "Saving..." : "Save Profile"}
+                </button>
+
+                {message && (
+                    <p
+                        style={{
+                            margin: 0,
+                            color: message.startsWith("Error")
+                                ? "#fca5a5"
+                                : "#86efac",
+                            fontSize: "14px",
+                        }}
+                    >
+                        {message}
+                    </p>
+                )}
             </div>
-
-            <br />
-
-            <div>
-                <label>Last name</label>
-                <br />
-
-                <input
-                    type="text"
-                    value={last}
-                    onChange={(e) => setLast(e.target.value)}
-                    style={{
-                        border: "1px solid white",
-                        padding: "8px",
-                        marginTop: "5px",
-                    }}
-                />
-            </div>
-
-            <br />
-
-            <button
-                type="button"
-                onClick={updateProfile}
-                disabled={saving}
-                style={{
-                    border: "1px solid white",
-                    padding: "10px 16px",
-                    cursor: "pointer",
-                    backgroundColor: "white",
-                    color: "black",
-                }}
-            >
-                {saving ? "Saving..." : "Save Profile"}
-            </button>
-
-            {message && <p>{message}</p>}
         </div>
     );
 }

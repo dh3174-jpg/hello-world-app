@@ -1,3 +1,4 @@
+import Navbar from "@/app/components/navbar";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import ProfileForm from "./profile-form";
@@ -20,21 +21,49 @@ export default async function ProfilePage() {
         .single();
 
     return (
-        <main style={{ padding: "40px" }}>
-            <h1>Profile</h1>
+        <main
+            style={{
+                minHeight: "100vh",
+                background: "#050505",
+                color: "#f5f5f5",
+                padding: "24px",
+            }}
+        >
+            <div
+                style={{
+                    maxWidth: "1100px",
+                    margin: "0 auto",
+                }}
+            >
+                <Navbar />
 
-            <p>
-                <a href="/">← Back Home</a>
-            </p>
+                <section style={{ maxWidth: "700px" }}>
+                    <h1
+                        style={{
+                            fontSize: "44px",
+                            marginBottom: "12px",
+                        }}
+                    >
+                        Profile
+                    </h1>
 
-            <p>Signed in as {user.email}</p>
+                    <p
+                        style={{
+                            color: "#bdbdbd",
+                            marginBottom: "30px",
+                        }}
+                    >
+                        Signed in as {user.email}
+                    </p>
 
-            <ProfileForm
-                userId={user.id}
-                firstName={profile?.first_name ?? ""}
-                lastName={profile?.last_name ?? ""}
-                avatarUrl={profile?.avatar_url ?? ""}
-            />
+                    <ProfileForm
+                        userId={user.id}
+                        firstName={profile?.first_name ?? ""}
+                        lastName={profile?.last_name ?? ""}
+                        avatarUrl={profile?.avatar_url ?? ""}
+                    />
+                </section>
+            </div>
         </main>
     );
 }

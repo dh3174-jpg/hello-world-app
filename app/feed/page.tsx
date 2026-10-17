@@ -1,6 +1,7 @@
+import Navbar from "@/app/components/navbar";
+import FeedList from "./feed-list";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import VoteButtons from "./vote-buttons";
 
 export default async function FeedPage() {
     const supabase = await createClient();
@@ -15,7 +16,13 @@ export default async function FeedPage() {
 
     const { data: generations, error } = await supabase
         .from("generations")
-        .select("*")
+        .select(`
+        *,
+        votes (
+            user_id,
+            vote
+        )
+    `)
         .order("created_at", { ascending: false });
 
     if (error) {
@@ -23,42 +30,61 @@ export default async function FeedPage() {
     }
 
     return (
-        <main style={{ padding: "40px", maxWidth: "800px" }}>
-            <h1>NYC Caption Feed</h1>
+        <main
+            style={{
+                minHeight: "100vh",
+                background: "#050505",
+                color: "#f5f5f5",
+                padding: "24px",
+            }}
+        >
+            <div
+                style={{
+                    maxWidth: "1000px",
+                    margin: "0 auto",
+                }}
+            >
+                <Navbar />
 
-            <p>
-                <a href="/">← Back Home</a>
-            </p>
+                <section style={{ marginBottom: "40px" }}>
+                    <h1
+                        style={{
+                            fontSize: "44px",
+                            marginBottom: "12px",
+                        }}
+                    >
+                        Explore
+                    </h1>
 
-            <p>Rate AI-generated captions from other users.</p>
+                    <p
+                        style={{
+                            color: "#bdbdbd",
+                            fontSize: "18px",
+                        }}
+                    >
+                        See AI-generated captions from the community and vote on
+                        the ones you would actually use.
+                    </p>
+                </section>
 
-            {generations?.length === 0 && (
-                <p>No captions have been generated yet.</p>
-            )}
+                {generations?.length === 0 && (
+                    <p style={{ color: "#a3a3a3" }}>
+                        No captions have been generated yet.
+                    </p>
+                )}
 
-            {generations?.map((generation) => (
                 <div
-                    key={generation.id}
                     style={{
-                        border: "1px solid white",
-                        padding: "20px",
-                        marginTop: "20px",
+                        display: "grid",
+                        gap: "20px",
                     }}
                 >
-                    <p>
-                        <strong>Prompt:</strong> {generation.prompt}
-                    </p>
-
-                    <p>
-                        <strong>AI Caption:</strong> {generation.generated_text}
-                    </p>
-
-                    <VoteButtons
-                        generationId={generation.id}
+                    <FeedList
+                        generations={generations || []}
                         userId={user.id}
                     />
                 </div>
-            ))}
+            </div>
         </main>
     );
 }
