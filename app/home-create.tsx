@@ -4,8 +4,8 @@ import { useState } from "react";
 import Navbar from "@/app/components/navbar";
 
 export default function HomeCreate({
-                                       firstName,
-                                   }: {
+    firstName,
+}: {
     firstName: string;
 }) {
     const [moment, setMoment] = useState("");
@@ -48,8 +48,9 @@ export default function HomeCreate({
         <main
             style={{
                 minHeight: "100vh",
-                background: "#050505",
-                color: "#f5f5f5",
+                background:
+                    "linear-gradient(135deg, #2a1748 0%, #3a2470 45%, #1f4f8f 100%)",
+                color: "#f8f5fb",
                 padding: "24px",
             }}
         >
@@ -57,9 +58,11 @@ export default function HomeCreate({
                 style={{
                     maxWidth: "1100px",
                     margin: "0 auto",
-                    border: "1px solid #2a2a2a",
+                    border: "1px solid #3a2b49",
                     borderRadius: "24px",
                     padding: "28px",
+                    background: "rgba(23, 15, 31, 0.88)",
+                    boxShadow: "0 24px 70px rgba(0, 0, 0, 0.24)",
                 }}
             >
                 <Navbar />
@@ -67,7 +70,7 @@ export default function HomeCreate({
                 <section style={{ maxWidth: "800px" }}>
                     <p
                         style={{
-                            color: "#a3a3a3",
+                            color: "#cfc5d9",
                             marginBottom: "12px",
                         }}
                     >
@@ -76,8 +79,10 @@ export default function HomeCreate({
 
                     <h1
                         style={{
-                            fontSize: "48px",
+                            fontSize: "52px",
+                            lineHeight: "1.05",
                             marginBottom: "16px",
+                            letterSpacing: "-0.03em",
                         }}
                     >
                         Your moment, but better. ✨
@@ -86,7 +91,7 @@ export default function HomeCreate({
                     <p
                         style={{
                             fontSize: "20px",
-                            color: "#bdbdbd",
+                            color: "#d6d0db",
                             lineHeight: "1.6",
                             marginBottom: "40px",
                         }}
@@ -101,6 +106,7 @@ export default function HomeCreate({
                             display: "block",
                             fontSize: "18px",
                             marginBottom: "12px",
+                            color: "#f3edf7",
                         }}
                     >
                         What happened?
@@ -115,14 +121,15 @@ export default function HomeCreate({
                         className="caption-textarea"
                         style={{
                             width: "100%",
-                            background: "#090909",
-                            color: "#f5f5f5",
-                            border: "1px solid #3a3a3a",
+                            background: "#21172b",
+                            color: "#f8f5fb",
+                            border: "1px solid #4a365d",
                             borderRadius: "16px",
                             padding: "18px",
                             fontSize: "17px",
                             resize: "vertical",
                             boxSizing: "border-box",
+                            outline: "none",
                         }}
                     />
 
@@ -131,6 +138,7 @@ export default function HomeCreate({
                             style={{
                                 fontSize: "18px",
                                 marginBottom: "14px",
+                                color: "#f3edf7",
                             }}
                         >
                             What&apos;s your vibe?
@@ -149,8 +157,8 @@ export default function HomeCreate({
                                     type="button"
                                     onClick={() => setVibe(option)}
                                     className={`vibe-button ${
-                                        vibe === option ? "vibe-selected" : ""
-                                    }`}
+    vibe === option ? "vibe-selected" : ""
+}`}
                                 >
                                     {option}
                                 </button>
@@ -185,14 +193,16 @@ export default function HomeCreate({
                             style={{
                                 marginTop: "40px",
                                 padding: "28px",
-                                border: "1px solid #2f2f2f",
+                                border: "1px solid #4a365d",
                                 borderRadius: "18px",
-                                background: "#0a0a0a",
+                                background: "#21172b",
+                                boxShadow:
+                                    "0 18px 48px rgba(11, 5, 18, 0.22)",
                             }}
                         >
                             <p
                                 style={{
-                                    color: "#a78bfa",
+                                    color: "#bda6ff",
                                     fontSize: "14px",
                                     fontWeight: 600,
                                     marginBottom: "10px",
@@ -213,7 +223,7 @@ export default function HomeCreate({
 
                             <p
                                 style={{
-                                    color: "#a3a3a3",
+                                    color: "#cfc5d9",
                                     marginTop: "16px",
                                 }}
                             >
@@ -235,9 +245,9 @@ export default function HomeCreate({
                                     style={{
                                         padding: "11px 18px",
                                         borderRadius: "10px",
-                                        border: "1px solid #3a3a3a",
-                                        background: "#111111",
-                                        color: "#f5f5f5",
+                                        border: "1px solid #5a436c",
+                                        background: "#2a1d36",
+                                        color: "#f8f5fb",
                                         cursor: loading
                                             ? "not-allowed"
                                             : "pointer",
@@ -252,7 +262,7 @@ export default function HomeCreate({
                                         padding: "11px 18px",
                                         borderRadius: "10px",
                                         background: "#a78bfa",
-                                        color: "#0a0a0a",
+                                        color: "#160f1e",
                                         fontWeight: 600,
                                         textDecoration: "none",
                                     }}

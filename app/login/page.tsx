@@ -18,8 +18,9 @@ export default function LoginPage() {
         <main
             style={{
                 minHeight: "100vh",
-                background: "#050505",
-                color: "#f5f5f5",
+                background:
+                    "linear-gradient(135deg, #3b1d6b 0%, #5b3aa8 50%, #2f6fb3 100%)",
+                color: "#f8f5fb",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -29,18 +30,23 @@ export default function LoginPage() {
             <div
                 style={{
                     width: "100%",
-                    maxWidth: "460px",
-                    border: "1px solid #2f2f2f",
-                    borderRadius: "24px",
-                    background: "#0a0a0a",
-                    padding: "36px",
+                    maxWidth: "500px",
+                    border: "1px solid rgba(255, 255, 255, 0.16)",
+                    borderRadius: "26px",
+                    background: "rgba(20, 15, 34, 0.88)",
+                    padding: "42px",
+                    boxShadow: "0 24px 70px rgba(0, 0, 0, 0.28)",
+                    backdropFilter: "blur(12px)",
                 }}
             >
                 <p
                     style={{
-                        margin: "0 0 36px",
-                        fontSize: "22px",
-                        fontWeight: 600,
+                        margin: "0 0 34px",
+                        fontSize: "48px",
+                        lineHeight: "1",
+                        fontWeight: 700,
+                        letterSpacing: "-0.04em",
+                        color: "#ffffff",
                     }}
                 >
                     ✧ hello world.
@@ -49,8 +55,9 @@ export default function LoginPage() {
                 <h1
                     style={{
                         margin: "0 0 14px",
-                        fontSize: "38px",
+                        fontSize: "40px",
                         lineHeight: "1.15",
+                        letterSpacing: "-0.025em",
                     }}
                 >
                     Your moment, but better. ✨
@@ -58,7 +65,7 @@ export default function LoginPage() {
 
                 <p
                     style={{
-                        color: "#a3a3a3",
+                        color: "#e7e0ef",
                         fontSize: "17px",
                         lineHeight: "1.6",
                         marginBottom: "32px",
@@ -76,13 +83,16 @@ export default function LoginPage() {
                         width: "100%",
                         padding: "14px 18px",
                         borderRadius: "12px",
-                        border: "1px solid #3a3a3a",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
                         background: "#ffffff",
-                        color: "#050505",
+                        color: "#241238",
                         fontSize: "16px",
-                        fontWeight: 600,
+                        fontWeight: 700,
                         cursor: "pointer",
-                        transition: "transform 0.15s ease",
+                        transition:
+                            "transform 0.15s ease, box-shadow 0.15s ease",
+                        boxShadow:
+                            "0 8px 24px rgba(115, 87, 188, 0.24)",
                     }}
                     onMouseDown={(e) => {
                         e.currentTarget.style.transform = "scale(0.97)";
@@ -101,7 +111,7 @@ export default function LoginPage() {
                     style={{
                         marginTop: "22px",
                         marginBottom: 0,
-                        color: "#737373",
+                        color: "#c9bfd3",
                         fontSize: "13px",
                         lineHeight: "1.5",
                     }}

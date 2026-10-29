@@ -19,15 +19,12 @@ export default function Navbar() {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                gap: "24px",
+                gap: "28px",
                 flexWrap: "wrap",
                 marginBottom: "60px",
             }}
         >
-            <a
-                href="/"
-                className="brand-link"
-            >
+            <a href="/" className="brand-link">
                 ✧ hello world.
             </a>
 
