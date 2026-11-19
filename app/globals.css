@@ -3,6 +3,11 @@
 :root {
   --background: #160f1e;
   --foreground: #f8f5fb;
+  --gradient-purple-dark: #2a1748;
+  --gradient-purple: #3a2470;
+  --gradient-blue: #1f4f8f;
+  --page-muted: #e0d8ea;
+  --content-surface: #19161e;
 }
 
 @theme inline {
@@ -17,6 +22,60 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.consumer-page {
+  min-height: 100vh;
+  padding: 24px;
+  color: var(--foreground);
+  background: linear-gradient(
+    var(--page-gradient-angle, 135deg),
+    var(--gradient-purple-dark) 0%,
+    var(--page-gradient-middle, var(--gradient-purple)) 45%,
+    var(--page-gradient-end, var(--gradient-blue)) 100%
+  );
+}
+
+.consumer-page--explore {
+  --page-gradient-angle: 150deg;
+}
+
+.consumer-page--history {
+  --page-gradient-angle: 155deg;
+  --page-gradient-end: #253963;
+}
+
+.consumer-page--login {
+  --page-gradient-middle: #5b3aa8;
+  --page-gradient-end: #2f6fb3;
+}
+
+.consumer-page :focus-visible {
+  outline: 2px solid #f8f5fb;
+  outline-offset: 3px;
+}
+
+.consumer-header {
+  padding-bottom: 16px;
+  margin-bottom: 44px;
+  border-bottom: 1px solid rgb(224 216 234 / 24%);
+}
+
+.standalone-generator {
+  max-width: 700px;
+  padding: 16px;
+}
+
+.standalone-caption-input,
+.standalone-caption-result {
+  background: var(--content-surface);
+  border: 1px solid #8a729e;
+  border-radius: 12px;
+}
+
+.standalone-caption-result {
+  margin-top: 30px;
+  padding: 20px;
 }
 
 /* =====================================
@@ -163,6 +222,10 @@ body {
   opacity: 0.65;
 }
 
+.standalone-generate-button {
+  margin-top: 0;
+}
+
 .caption-textarea::placeholder {
   color: #95899f;
 }
@@ -261,6 +324,18 @@ body {
 /* =====================================
    VIBE BUTTONS
 ===================================== */
+
+.custom-tone-textarea {
+  width: 100%;
+  background: #21172b;
+  color: #f8f5fb;
+  border: 1px solid #4a365d;
+  border-radius: 16px;
+  padding: 18px;
+  font-size: 17px;
+  resize: vertical;
+  box-sizing: border-box;
+}
 
 .vibe-button {
   padding: 10px 18px;

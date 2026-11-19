@@ -16,15 +16,11 @@ export default function LoginPage() {
 
     return (
         <main
+            className="consumer-page consumer-page--login"
             style={{
-                minHeight: "100vh",
-                background:
-                    "linear-gradient(135deg, #3b1d6b 0%, #5b3aa8 50%, #2f6fb3 100%)",
-                color: "#f8f5fb",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                padding: "24px",
             }}
         >
             <div

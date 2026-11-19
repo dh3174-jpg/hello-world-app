@@ -10,13 +10,24 @@ export default function HomeCreate({
 }) {
     const [moment, setMoment] = useState("");
     const [vibe, setVibe] = useState("Casual");
+    const [customTone, setCustomTone] = useState("");
+    const [customToneError, setCustomToneError] = useState(false);
+    const [generatedVibe, setGeneratedVibe] = useState("");
     const [generatedText, setGeneratedText] = useState("");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
 
-    const vibes = ["Casual", "Funny", "Thoughtful", "Professional"];
+    const vibes = ["Casual", "Funny", "Thoughtful", "Professional", "Other"];
 
     const generateCaption = async () => {
+        if (!moment.trim() || loading) return;
+
+        const description = customTone.trim();
+        if (vibe === "Other" && !description) {
+            setCustomToneError(true);
+            return;
+        }
+
         setLoading(true);
         setMessage("");
         setGeneratedText("");
@@ -29,6 +40,7 @@ export default function HomeCreate({
             body: JSON.stringify({
                 prompt: moment,
                 vibe,
+                ...(vibe === "Other" ? { customTone: description } : {}),
             }),
         });
 
@@ -41,19 +53,12 @@ export default function HomeCreate({
         }
 
         setGeneratedText(data.generatedText);
+        setGeneratedVibe(vibe === "Other" ? description : vibe);
         setLoading(false);
     };
 
     return (
-        <main
-            style={{
-                minHeight: "100vh",
-                background:
-                    "linear-gradient(135deg, #2a1748 0%, #3a2470 45%, #1f4f8f 100%)",
-                color: "#f8f5fb",
-                padding: "24px",
-            }}
-        >
+        <main className="consumer-page">
             <div
                 style={{
                     maxWidth: "1100px",
@@ -129,7 +134,6 @@ export default function HomeCreate({
                             fontSize: "17px",
                             resize: "vertical",
                             boxSizing: "border-box",
-                            outline: "none",
                         }}
                     />
 
@@ -155,15 +159,64 @@ export default function HomeCreate({
                                 <button
                                     key={option}
                                     type="button"
-                                    onClick={() => setVibe(option)}
-                                    className={`vibe-button ${
-    vibe === option ? "vibe-selected" : ""
-}`}
+                                    onClick={() => {
+                                        setVibe(option);
+                                        if (option !== "Other") {
+                                            setCustomTone("");
+                                            setCustomToneError(false);
+                                        }
+                                    }}
+                                    aria-pressed={vibe === option}
+                                    className={`vibe-button ${vibe === option ? "vibe-selected" : ""}`}
                                 >
                                     {option}
                                 </button>
                             ))}
                         </div>
+                        {vibe === "Other" && (
+                            <div style={{ marginTop: "16px" }}>
+                                <label
+                                    htmlFor="custom-tone"
+                                    style={{ display: "block", marginBottom: "6px" }}
+                                >
+                                    Describe the tone you want
+                                </label>
+                                <p
+                                    id="custom-tone-help"
+                                    style={{ color: "#cfc5d9", marginBottom: "12px" }}
+                                >
+                                    Tell us exactly how you want the caption to feel.
+                                </p>
+                                <textarea
+                                    id="custom-tone"
+                                    className="caption-textarea custom-tone-textarea"
+                                    rows={2}
+                                    required
+                                    aria-invalid={customToneError}
+                                    aria-describedby={
+                                        customToneError
+                                            ? "custom-tone-help custom-tone-error"
+                                            : "custom-tone-help"
+                                    }
+                                    value={customTone}
+                                    onChange={(event) => {
+                                        const description = event.target.value;
+                                        setCustomTone(description);
+                                        if (description.trim()) setCustomToneError(false);
+                                    }}
+                                    placeholder="Playful but not too silly, professional with a little humor…"
+                                />
+                                {customToneError && (
+                                    <p
+                                        id="custom-tone-error"
+                                        role="alert"
+                                        style={{ color: "#fca5a5", marginTop: "8px" }}
+                                    >
+                                        Describe the tone you want before generating a caption.
+                                    </p>
+                                )}
+                            </div>
+                        )}
                     </div>
 
                     <button
@@ -227,7 +280,7 @@ export default function HomeCreate({
                                     marginTop: "16px",
                                 }}
                             >
-                                Vibe: {vibe}
+                                Vibe: {generatedVibe}
                             </p>
 
                             <div
@@ -241,7 +294,7 @@ export default function HomeCreate({
                                 <button
                                     type="button"
                                     onClick={generateCaption}
-                                    disabled={loading}
+                                    disabled={!moment.trim() || loading}
                                     style={{
                                         padding: "11px 18px",
                                         borderRadius: "10px",

@@ -102,7 +102,7 @@ export default function ProfileForm({
             style={{
                 border: "1px solid #2f2f2f",
                 borderRadius: "20px",
-                background: "#0a0a0a",
+                background: "var(--content-surface)",
                 padding: "28px",
             }}
         >
@@ -126,7 +126,7 @@ export default function ProfileForm({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        color: "#737373",
+                        color: "#a3a3a3",
                         fontSize: "14px",
                     }}
                 >
@@ -186,7 +186,7 @@ export default function ProfileForm({
                         style={{
                             marginTop: "10px",
                             marginBottom: 0,
-                            color: "#737373",
+                            color: "#a3a3a3",
                             fontSize: "13px",
                         }}
                     >
@@ -228,7 +228,6 @@ export default function ProfileForm({
                             background: "#111111",
                             color: "#ffffff",
                             fontSize: "16px",
-                            outline: "none",
                         }}
                     />
                 </div>
@@ -260,7 +259,6 @@ export default function ProfileForm({
                             background: "#111111",
                             color: "#ffffff",
                             fontSize: "16px",
-                            outline: "none",
                         }}
                     />
                 </div>

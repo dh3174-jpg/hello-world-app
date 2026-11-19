@@ -168,7 +168,7 @@ export default function FeedList({
                         border: "1px solid #2f2f2f",
                         borderRadius: "18px",
                         padding: "30px",
-                        background: "#0a0a0a",
+                        background: "var(--content-surface)",
                         color: "#a3a3a3",
                     }}
                 >
@@ -189,7 +189,7 @@ export default function FeedList({
                             border: "1px solid #2f2f2f",
                             borderRadius: "18px",
                             padding: "24px",
-                            background: "#0a0a0a",
+                            background: "var(--content-surface)",
                         }}
                     >
                         <div

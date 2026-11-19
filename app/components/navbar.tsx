@@ -15,13 +15,13 @@ export default function Navbar() {
 
     return (
         <header
+            className="consumer-header"
             style={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
                 gap: "28px",
                 flexWrap: "wrap",
-                marginBottom: "60px",
             }}
         >
             <a href="/" className="brand-link">

@@ -21,14 +21,7 @@ export default async function ProfilePage() {
         .single();
 
     return (
-        <main
-            style={{
-                minHeight: "100vh",
-                background: "#050505",
-                color: "#f5f5f5",
-                padding: "24px",
-            }}
-        >
+        <main className="consumer-page consumer-page--history">
             <div
                 style={{
                     maxWidth: "1100px",
@@ -49,7 +42,7 @@ export default async function ProfilePage() {
 
                     <p
                         style={{
-                            color: "#bdbdbd",
+                            color: "var(--page-muted)",
                             marginBottom: "30px",
                         }}
                     >

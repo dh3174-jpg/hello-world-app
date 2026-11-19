@@ -30,14 +30,7 @@ export default async function FeedPage() {
     }
 
     return (
-        <main
-            style={{
-                minHeight: "100vh",
-                background: "#050505",
-                color: "#f5f5f5",
-                padding: "24px",
-            }}
-        >
+        <main className="consumer-page consumer-page--explore">
             <div
                 style={{
                     maxWidth: "1000px",
@@ -58,7 +51,7 @@ export default async function FeedPage() {
 
                     <p
                         style={{
-                            color: "#bdbdbd",
+                            color: "var(--page-muted)",
                             fontSize: "18px",
                         }}
                     >
@@ -68,7 +61,7 @@ export default async function FeedPage() {
                 </section>
 
                 {generations?.length === 0 && (
-                    <p style={{ color: "#a3a3a3" }}>
+                    <p style={{ color: "var(--page-muted)" }}>
                         No captions have been generated yet.
                     </p>
                 )}

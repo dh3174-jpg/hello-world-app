@@ -25,14 +25,7 @@ export default async function MyCaptionsPage() {
     }
 
     return (
-        <main
-            style={{
-                minHeight: "100vh",
-                background: "#050505",
-                color: "#f5f5f5",
-                padding: "24px",
-            }}
-        >
+        <main className="consumer-page consumer-page--history">
             <div
                 style={{
                     maxWidth: "1100px",
@@ -53,7 +46,7 @@ export default async function MyCaptionsPage() {
 
                     <p
                         style={{
-                            color: "#bdbdbd",
+                            color: "var(--page-muted)",
                             fontSize: "18px",
                         }}
                     >
@@ -62,7 +55,7 @@ export default async function MyCaptionsPage() {
                 </section>
 
                 {captions?.length === 0 && (
-                    <p style={{ color: "#a3a3a3" }}>
+                    <p style={{ color: "var(--page-muted)" }}>
                         You haven&apos;t generated any captions yet.
                     </p>
                 )}

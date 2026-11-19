@@ -15,11 +15,20 @@ export async function POST(request: Request) {
         );
     }
 
-    const { prompt, vibe = "Casual" } = await request.json();
+    const { prompt, vibe = "Casual", customTone } = await request.json();
 
     if (!prompt) {
         return NextResponse.json(
             { error: "Prompt is required." },
+            { status: 400 }
+        );
+    }
+
+    const description = typeof customTone === "string" ? customTone.trim() : "";
+
+    if (vibe === "Other" && !description) {
+        return NextResponse.json(
+            { error: "Describe the tone you want before generating a caption." },
             { status: 400 }
         );
     }
@@ -42,6 +51,12 @@ export async function POST(request: Request) {
     let response: Response;
 
     try {
+        const toneInstruction = vibe === "Other"
+            ? `Use this requested tone and style for the caption: ${description}`
+            : `Vibe: ${vibe}
+
+Make the caption feel ${vibe.toLowerCase()}.`;
+
         response = await fetch(
             `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`,
             {
@@ -58,9 +73,7 @@ export async function POST(request: Request) {
                                     text: `Create one social-media caption based on the user's moment.
 
 Moment: ${prompt}
-Vibe: ${vibe}
-
-Make the caption feel ${vibe.toLowerCase()}.
+${toneInstruction}
 Keep the original meaning of the moment, but make the wording more engaging and natural.
 Keep it short and social-media friendly, ideally one sentence and under 20 words.
 Return only the caption itself, with no explanation or quotation marks.`,
@@ -71,7 +84,7 @@ Return only the caption itself, with no explanation or quotation marks.`,
                 }),
             }
         );
-    } catch (error) {
+    } catch {
         clearTimeout(timeout);
 
         return NextResponse.json(
